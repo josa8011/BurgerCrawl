@@ -1,12 +1,16 @@
 {{extend 'layout.html'}}
 
 <h1>Matchningar</h1>
-{{for match in matches:}}
-	{{=match}}
+{{for url, restaurant in matches:}}
+	Hittade burgare hos <a href={{=url}}>{{=restaurant}}</a><br>
 {{pass}}
-<br><br><br><br>
+<br><br>
 
 <h1>Restauranger</h1>
 {{for url, restaurant in restaurants:}}
-	{{=url}} - {{restaurant}}<br>
+	<a href={{=url}}>{{=restaurant}}</a><br>
 {{pass}}
+<br><br>
+<form action="{{=URL("add")}}" method="get">
+	Url: <input type="text" id="url" name="url" value="http://"> Namn: <input type="text" id="namn" name="namn" value=""> <input type="submit" value="Lägg till">
+</form>

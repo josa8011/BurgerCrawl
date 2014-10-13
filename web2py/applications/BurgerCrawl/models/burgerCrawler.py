@@ -3,7 +3,11 @@ import urllib
 class BurgerCrawler(object):
 	
 	def _matchSite(self, url, word):
-		f = urllib.urlopen(url)
+		try:
+			f = urllib.urlopen(url)
+		except:
+			return None
+
 		for line in f:
 			if word in line.lower():
 				return line
@@ -12,22 +16,22 @@ class BurgerCrawler(object):
 		restaurants = list()
 		with open("sites.txt", "r") as sites:
 			for line in sites:
-				if line.strip().len() > 0:
-					url, restaurant = line.split(" ")
+				if len(line.strip()) > 0:
+					url, restaurant = line.strip().split(" ", 1)
 					restaurants.append((url.strip(), restaurant.strip()))
 
-        return restaurants
+		return restaurants
 
 	def addRestaurant(self, url, restaurant):
 		with open("sites.txt", "a") as sites:
-			sites.writeline(url + " " + restaurant)
+			sites.write(url + " " + restaurant + "\n")
 		
 	def crawl(self, word):
 		matches = list()
 		with open("sites.txt", "r") as sites:
 			for line in sites:
-				if line.strip().len() > 0:
-					url, restaurant = line.split(" ")
+				if len(line.strip()) > 0:
+					url, restaurant = line.strip().split(" ", 1)
 	
 					url = url.strip()
 					restaurant = restaurant.strip()
@@ -35,7 +39,7 @@ class BurgerCrawler(object):
 					l = self._matchSite(url, word)
 			
 					if l is not None:
-						match = "Match at %s - %s" % (restaurant, url)
+						match = (url, restaurant)
 						matches.append(match)
 
 		return matches

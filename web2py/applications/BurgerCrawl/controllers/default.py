@@ -15,6 +15,18 @@ def index():
                 matches=matches,
                 restaurants=restaurants)
 
+def add():
+	burgerCrawler = BurgerCrawler()
+
+	url = request.vars.url if request.vars.url != 'None' else None
+	restaurant = request.vars.namn if request.vars.namn != 'None' else None
+
+	if restaurant is not None and url is not None:
+		burgerCrawler.addRestaurant(url, restaurant)
+
+	redirect(request.env.http_referer)
+	return dict()
+
 def error():
     return dict()
 
