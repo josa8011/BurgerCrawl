@@ -4,8 +4,16 @@ def user(): return dict(form=auth())
 def download(): return response.download(request,db)
 def call(): return service()
 ### end requires
+
 def index():
-    return dict()
+    burgerCrawler = BurgerCrawler()
+
+    matches = burgerCrawler.crawl("burgare")
+    restaurants = burgerCrawler.getRestaurants()
+    
+    return dict(
+                matches=matches,
+                restaurants=restaurants)
 
 def error():
     return dict()

@@ -1,3 +1,8 @@
 {{extend 'layout.html'}}
 
-<h1>Welcome to my new app</h1>
+<h1>Matches</h1>
+{{for match in matches:}}
+	{{=match}}
+{{pass}}
+
+<h1>Lägg till restaurang</h1>
