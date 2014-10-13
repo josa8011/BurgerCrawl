@@ -1,8 +1,12 @@
 {{extend 'layout.html'}}
 
-<h1>Matches</h1>
+<h1>Matchningar</h1>
 {{for match in matches:}}
 	{{=match}}
 {{pass}}
+<br><br><br><br>
 
-<h1>Lägg till restaurang</h1>
+<h1>Restauranger</h1>
+{{for url, restaurant in restaurants:}}
+	{{=url}} - {{restaurant}}<br>
+{{pass}}
