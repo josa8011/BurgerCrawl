@@ -22,6 +22,18 @@ class BurgerCrawler(object):
 
 		return restaurants
 
+	def getMatches(self):
+		matches = list()
+		with open("matches.txt", "r") as mFile:
+			for line in mFile:
+				url, restaurant = line.strip().split(" ", 1)
+
+				match = (url.strip(), restaurant.strip())
+
+				matches.append(match)
+
+		return matches
+
 	def addRestaurant(self, url, restaurant):
 		with open("sites.txt", "a") as sites:
 			sites.write(url + " " + restaurant + "\n")
@@ -29,18 +41,16 @@ class BurgerCrawler(object):
 	def crawl(self, word):
 		matches = list()
 		with open("sites.txt", "r") as sites:
-			for line in sites:
-				if len(line.strip()) > 0:
-					url, restaurant = line.strip().split(" ", 1)
+			with open("matches.txt", "w") as mFile:
+				for line in sites:
+					if len(line.strip()) > 0:
+						url, restaurant = line.strip().split(" ", 1)
+		
+						url = url.strip()
+						restaurant = restaurant.strip()
 	
-					url = url.strip()
-					restaurant = restaurant.strip()
-
-					l = self._matchSite(url, word)
-			
-					if l is not None:
-						match = (url, restaurant)
-						matches.append(match)
-
-		return matches
+						l = self._matchSite(url, word)
+				
+						if l is not None:
+							mFile.write(url + " " + restaurant + "\n")
 	

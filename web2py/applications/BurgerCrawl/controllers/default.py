@@ -8,7 +8,7 @@ def call(): return service()
 def index():
     burgerCrawler = BurgerCrawler()
 
-    matches = burgerCrawler.crawl("burgare")
+    matches = burgerCrawler.getMatches()
     restaurants = burgerCrawler.getRestaurants()
     
     return dict(
